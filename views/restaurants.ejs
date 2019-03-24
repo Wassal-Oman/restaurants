@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
+    <link href="/vendor/fonts/circular-std/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/libs/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="/vendor/fonts/fontawesome/css/fontawesome-all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css"
+    />
+    <style>
+      .custom-div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+    <title>Restaurants | Restaurants</title>
+  </head>
+
+  <body>
+    <div class="dashboard-main-wrapper">
+      <!-- header -->
+      <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+          <a class="navbar-brand" href="/">RESTAURANTS</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- sidebar -->
+      <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav flex-column">
+                <li class="nav-divider">
+                  Menu
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/"
+                    ><i class="fa fa-fw fa-home"></i>Dashboard</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/users"
+                    ><i class="fa fa-fw fa-users"></i>Users</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="/restaurants"
+                    ><i class="fa fa-fw fa-utensils"></i>Restaurants</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/ads"
+                    ><i class="fa fa-fw fa-rss"></i>Advertisements</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout"
+                    ><i class="fas fa-fw fa-sign-out-alt"></i>Log out</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <div class="dashboard-wrapper">
+        <div class="container-fluid dashboard-content">
+          <div class="row">
+            <div class="col-xl-10">
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <div class="page-header" id="top">
+                    <h2 class="pageheader-title">Restaurants</h2>
+                    <div class="page-breadcrumb">
+                      <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item">
+                            <a href="/" class="breadcrumb-link">Dashboard</a>
+                          </li>
+                          <li
+                            class="breadcrumb-item active"
+                            aria-current="page"
+                          >
+                            Restaurants
+                          </li>
+                        </ol>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-10">
+                  <a
+                    style="margin-bottom: 10px"
+                    href="/restaurants/add"
+                    class="btn btn-primary"
+                    >Add Restaurant</a
+                  >
+                </div>
+              </div>
+
+              <div class="row">
+                <% if(typeof restaurants != null && restaurants.length > 0){ %>
+                <% restaurants.forEach(restaurant => { %>
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="card">
+                    <div class="card-header custom-div">
+                      <h3 class="card-title mb-2"><%= restaurant.name %></h3>
+                      <h4>
+                        <span><i class="fa fa-fw fa-star"></i></span><%=
+                        restaurant.rating %>
+                      </h4>
+                    </div>
+                    <img
+                      src="<%= restaurant.image %>"
+                      alt="Restaurant Image"
+                      width="100%"
+                      height="200px"
+                    />
+                    <div class="card-body">
+                      <p class="card-text">
+                        Location: <%= restaurant.location %>
+                      </p>
+                      <div class="custom-div">
+                        <a
+                          href="/restaurants/<%= restaurant.id %>/delete"
+                          class="card-link"
+                          onclick="return confirm('Are you sure to delete this restaurant?');"
+                          >Delete</a
+                        >
+                        <a
+                          href="/restaurants/<%= restaurant.name %>/edit"
+                          class="card-link"
+                          >Edit</a
+                        >
+                        <a
+                          href="/restaurants/<%= restaurant.id %>"
+                          class="card-link"
+                          >View</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }); %> <% } else { %>
+                <p class="col-12 text-center">No Available Data</p>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div class="footer">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                Copyright © 2019 Restaurants. All rights reserved.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/vendor/slimscroll/jquery.slimscroll.js"></script>
+    <script src="/libs/js/main-js.js"></script>
+  </body>
+</html>
