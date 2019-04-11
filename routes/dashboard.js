@@ -210,6 +210,10 @@ router.post(
               description,
               latitude,
               longitude,
+              geolocation: new admin.firestore.GeoPoint(
+                Number.parseFloat(latitude),
+                Number.parseFloat(longitude)
+              ),
               rating,
               image_name: val[0],
               image: val[1]
@@ -256,6 +260,7 @@ router.get("/restaurants/:id", sessionChecker, (req, res) => {
             image_name: doc.data().image_name,
             latitude: doc.data().latitude,
             longitude: doc.data().longitude,
+            geolocation: doc.data().geolocation,
             rating: doc.data().rating
           };
 
@@ -346,6 +351,7 @@ router.get("/restaurants/:name/edit", sessionChecker, (req, res) => {
               location: doc.data().location,
               latitude: doc.data().latitude,
               longitude: doc.data().longitude,
+              geolocation: doc.data().geolocation,
               description: doc.data().description,
               rating: doc.data().rating,
               image: doc.data().image,
@@ -410,6 +416,10 @@ router.post(
                   description,
                   latitude,
                   longitude,
+                  geolocation: new admin.firestore.GeoPoint(
+                    Number.parseFloat(latitude),
+                    Number.parseFloat(longitude)
+                  ),
                   rating,
                   image_name: val[0],
                   image: val[1]
@@ -439,6 +449,10 @@ router.post(
           description,
           latitude,
           longitude,
+          geolocation: new admin.firestore.GeoPoint(
+            Number.parseFloat(latitude),
+            Number.parseFloat(longitude)
+          ),
           rating
         })
         .then(val => {
